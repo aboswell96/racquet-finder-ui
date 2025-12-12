@@ -1,26 +1,4 @@
-node_modules/
-dist/
-build/
-.cache/
-.vite/
-*.log
-.env
-.env.*
-.DS_Store
-coverage/
-/.idea/
-/.vscode/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-pnpm-lock.yaml
-*.tgz
-/.pnp
-/.pnp.js
-out/
-coverage/
-public/build/# Logs
+# Logs
 logs
 *.log
 npm-debug.log*
