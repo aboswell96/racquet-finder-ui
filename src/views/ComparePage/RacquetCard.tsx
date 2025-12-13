@@ -12,6 +12,7 @@ export type Spec = {
   label: string;
   key: string;
   value: string | number;
+  unit: string;
 };
 
 export type RacquetCardProps = {
@@ -21,12 +22,12 @@ export type RacquetCardProps = {
 
 export const RacquetCard = ({ racquet }: RacquetCardProps) => {
   return (
-    <div className="flex min-h-[500px] min-w-[320px] flex-col gap-10 rounded-lg bg-white p-6 shadow-md transition-shadow hover:shadow">
-      {racquet.name}
+    <div className="flex min-h-[500px] min-w-[250px] flex-col gap-10 rounded-lg bg-white p-6 shadow-md transition-shadow hover:shadow">
+      {[racquet.brand, racquet.name].join(" ")}
       <img
         src={mockPhoto}
         alt={racquet.name}
-        className="h-100 w-full rounded-md object-cover"
+        className="h-48 w-full rounded-md object-cover"
       />
     </div>
   );

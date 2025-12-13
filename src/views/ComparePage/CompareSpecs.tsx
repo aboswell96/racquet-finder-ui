@@ -1,4 +1,4 @@
-import { STAT_PRIORITY } from "../../utils";
+import { getSpecComparisonDescription, STAT_PRIORITY } from "../../utils";
 import type { Spec } from "./RacquetCard";
 
 export type CompareSpecsProps = {
@@ -12,25 +12,49 @@ export const CompareStats = ({ specs_1, specs_2 }: CompareSpecsProps) => {
       {STAT_PRIORITY.map((statKey) => {
         const spec1 = specs_1.find((spec) => spec.key === statKey);
         const spec2 = specs_2.find((spec) => spec.key === statKey);
-        if (!spec1 && !spec2) return;
+        if (!spec1 && !spec2) return null;
         return (
           <div
             key={statKey}
             className="grid min-h-12 grid-cols-3 items-center gap-4"
           >
             {spec1 && (
-              <div className="flex justify-between">
-                <div>{spec1.label}</div>
-                <div>{spec1.value}</div>
+              <div className="flex min-h-12 items-center justify-between gap-3">
+                <div className="text-sm leading-tight whitespace-nowrap text-gray-600">
+                  {spec1.label}
+                </div>
+                <div className="flex items-baseline justify-end gap-1 leading-tight">
+                  <div className="text-base font-semibold whitespace-nowrap">
+                    {spec1.value}
+                  </div>
+                  {spec1.unit && (
+                    <div className="text-sm whitespace-nowrap text-gray-500">
+                      {spec1.unit}
+                    </div>
+                  )}
+                </div>
               </div>
             )}
             {spec1 && spec2 && (
-              <div className="flex justify-center text-gray-400">←→</div>
+              <div className="flex h-full items-center justify-center text-sm leading-tight text-gray-500">
+                {getSpecComparisonDescription(spec1, spec2)}
+              </div>
             )}
             {spec2 && (
-              <div className="flex justify-between">
-                <div>{spec2.value}</div>
-                <div>{spec2.label}</div>
+              <div className="flex min-h-12 items-center justify-between gap-3">
+                <div className="flex items-baseline justify-end gap-1 leading-tight">
+                  <div className="text-base font-semibold whitespace-nowrap">
+                    {spec2.value}
+                  </div>
+                  {spec2.unit && (
+                    <div className="text-sm whitespace-nowrap text-gray-500">
+                      {spec2.unit}
+                    </div>
+                  )}
+                </div>
+                <div className="text-sm leading-tight whitespace-nowrap text-gray-600">
+                  {spec2.label}
+                </div>
               </div>
             )}
           </div>
@@ -38,23 +62,4 @@ export const CompareStats = ({ specs_1, specs_2 }: CompareSpecsProps) => {
       })}
     </div>
   );
-  //   return (
-  //     <div className="grid min-h-12 grid-cols-3 items-center gap-4">
-  //       <div>
-  //         {specs_1.map((spec, index) => (
-  //           <div key={index} className="p-2 text-right">
-  //             {spec.value}
-  //           </div>
-  //         ))}
-  //       </div>
-  //       <div className="flex justify-center text-gray-400">←→</div>
-  //       <div>
-  //         {specs_2.map((spec, index) => (
-  //           <div key={index} className="p-2 text-left">
-  //             {spec.value}
-  //           </div>
-  //         ))}
-  //       </div>
-  //     </div>
-  //   );
 };

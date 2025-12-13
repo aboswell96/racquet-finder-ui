@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { type Racquet, RacquetCard } from "./RacquetCard";
-import { SelectDropDown } from "../../components/SelectDropDown";
+import { SelectRacquetDropDown } from "../../components/SelectRacquetDropDown";
 import { mockRacquets } from "../../utils";
 import { CompareStats } from "./CompareSpecs";
 
@@ -13,7 +13,7 @@ export const ComparePage = () => {
       Racquet Comparison
       <div className="flex justify-center gap-10">
         <div className="flex flex-col gap-5">
-          <SelectDropDown
+          <SelectRacquetDropDown
             items={mockRacquets}
             currentItem={racquet1}
             onSelect={setRacquet1}
@@ -27,7 +27,7 @@ export const ComparePage = () => {
           />
         </div>
         <div className="flex flex-col gap-5">
-          <SelectDropDown
+          <SelectRacquetDropDown
             items={mockRacquets}
             currentItem={racquet2}
             onSelect={setRacquet2}

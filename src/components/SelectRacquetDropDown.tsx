@@ -1,16 +1,17 @@
 import { useState } from "react";
+import type { Racquet } from "../views/ComparePage/RacquetCard";
 
-export type SelectDropDownProps<T extends { name: string; id: string }> = {
-  items: T[];
-  currentItem: T;
-  onSelect: (item: T) => void;
+export type SelectRacquetDropDownProps = {
+  items: Racquet[];
+  currentItem: Racquet;
+  onSelect: (item: Racquet) => void;
 };
 
-export const SelectDropDown = <T extends { name: string; id: string }>({
+export const SelectRacquetDropDown = ({
   items,
   currentItem,
   onSelect,
-}: SelectDropDownProps<T>) => {
+}: SelectRacquetDropDownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className="rounded-lg bg-white p-6 shadow-md transition-shadow hover:shadow">
@@ -19,7 +20,7 @@ export const SelectDropDown = <T extends { name: string; id: string }>({
           setIsOpen(!isOpen);
         }}
       >
-        {currentItem.name}
+        {[currentItem.brand, currentItem.name].join(" ")}
       </div>
       <div className="absolute mt-2 bg-white shadow-lg">
         {isOpen &&
@@ -30,7 +31,9 @@ export const SelectDropDown = <T extends { name: string; id: string }>({
                 setIsOpen(false);
                 onSelect(item);
               }}
-              className="flex"
+              className={`flex cursor-pointer items-center justify-between px-4 py-3 transition-colors hover:bg-gray-50 ${
+                item.id === currentItem.id ? "bg-blue-50 text-blue-600" : ""
+              }`}
             >
               {item.name}
               {item === currentItem && (
