@@ -1,4 +1,4 @@
-import { getSpecComparisonDescription, STAT_PRIORITY } from "../../utils";
+import { getSpecComparisonDescription, STAT_PRIORITY } from "../../utils/utils";
 import type { Spec } from "./RacquetCard";
 
 export type CompareSpecsProps = {
@@ -16,19 +16,19 @@ export const CompareStats = ({ specs_1, specs_2 }: CompareSpecsProps) => {
         return (
           <div
             key={statKey}
-            className="grid min-h-12 grid-cols-3 items-center gap-4"
+            className="grid min-h-12 grid-cols-[1fr_140px_1fr] items-center gap-4"
           >
             {spec1 && (
-              <div className="flex min-h-12 items-center justify-between gap-3">
-                <div className="text-sm leading-tight whitespace-nowrap text-gray-600">
+              <div className="grid min-h-12 grid-cols-[120px_1fr] items-center gap-3">
+                <div className="truncate text-sm leading-tight whitespace-nowrap text-gray-600">
                   {spec1.label}
                 </div>
-                <div className="flex items-baseline justify-end gap-1 leading-tight">
+                <div className="flex items-baseline justify-end gap-1 leading-tight tabular-nums">
                   <div className="text-base font-semibold whitespace-nowrap">
                     {spec1.value}
                   </div>
                   {spec1.unit && (
-                    <div className="text-sm whitespace-nowrap text-gray-500">
+                    <div className="text-base whitespace-nowrap text-gray-500">
                       {spec1.unit}
                     </div>
                   )}
@@ -41,18 +41,18 @@ export const CompareStats = ({ specs_1, specs_2 }: CompareSpecsProps) => {
               </div>
             )}
             {spec2 && (
-              <div className="flex min-h-12 items-center justify-between gap-3">
-                <div className="flex items-baseline justify-end gap-1 leading-tight">
+              <div className="grid min-h-12 grid-cols-[1fr_120px] items-center gap-3">
+                <div className="flex items-baseline justify-start gap-1 leading-tight tabular-nums">
                   <div className="text-base font-semibold whitespace-nowrap">
                     {spec2.value}
                   </div>
                   {spec2.unit && (
-                    <div className="text-sm whitespace-nowrap text-gray-500">
+                    <div className="text-base whitespace-nowrap text-gray-500">
                       {spec2.unit}
                     </div>
                   )}
                 </div>
-                <div className="text-sm leading-tight whitespace-nowrap text-gray-600">
+                <div className="truncate text-right text-sm leading-tight whitespace-nowrap text-gray-600">
                   {spec2.label}
                 </div>
               </div>

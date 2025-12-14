@@ -1,10 +1,10 @@
 import { useState } from "react";
-import type { Racquet } from "../views/ComparePage/RacquetCard";
+import type { RacquetModel } from "../utils/utils";
 
 export type SelectRacquetDropDownProps = {
-  items: Racquet[];
-  currentItem: Racquet;
-  onSelect: (item: Racquet) => void;
+  items: RacquetModel[];
+  currentItem: RacquetModel;
+  onSelect: (item: RacquetModel) => void;
 };
 
 export const SelectRacquetDropDown = ({
@@ -24,29 +24,37 @@ export const SelectRacquetDropDown = ({
       </div>
       <div className="absolute mt-2 bg-white shadow-lg">
         {isOpen &&
-          items.map((item, index) => (
-            <div
-              key={index}
-              onClick={() => {
-                setIsOpen(false);
-                onSelect(item);
-              }}
-              className={`flex cursor-pointer items-center justify-between px-4 py-3 transition-colors hover:bg-gray-50 ${
-                item.id === currentItem.id ? "bg-blue-50 text-blue-600" : ""
-              }`}
-            >
-              {item.name}
-              {item === currentItem && (
-                <svg
-                  className="h-4 w-4 text-green-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path d="M7.5 13.5L4 10l1.4-1.4L7.5 10.7 14.6 3.6 16 5z" />
-                </svg>
-              )}
-            </div>
-          ))}
+          items
+            .sort((a, b) =>
+              [a.brand, a.name]
+                .join(" ")
+                .localeCompare([b.brand, b.name].join(" ")),
+            )
+            .map((item, index) => (
+              <div
+                key={index}
+                onClick={() => {
+                  setIsOpen(false);
+                  onSelect(item);
+                }}
+                className={`flex cursor-pointer items-center justify-between px-4 py-3 transition-colors hover:bg-gray-50 ${
+                  item.modelId === currentItem.modelId
+                    ? "bg-blue-50 text-blue-600"
+                    : ""
+                }`}
+              >
+                {[item.brand, item.name].join(" ")}
+                {item.modelId === currentItem.modelId && (
+                  <svg
+                    className="h-4 w-4 text-green-500"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M7.5 13.5L4 10l1.4-1.4L7.5 10.7 14.6 3.6 16 5z" />
+                  </svg>
+                )}
+              </div>
+            ))}
       </div>
     </div>
   );

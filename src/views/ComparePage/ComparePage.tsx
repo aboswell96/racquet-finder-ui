@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { type Racquet, RacquetCard } from "./RacquetCard";
+import { RacquetCard } from "./RacquetCard";
 import { SelectRacquetDropDown } from "../../components/SelectRacquetDropDown";
-import { mockRacquets } from "../../utils";
+import { type RacquetModel } from "../../utils/utils";
 import { CompareStats } from "./CompareSpecs";
+import { mockRacquets } from "../../utils/mockRacquets";
 
 export const ComparePage = () => {
-  const [racquet1, setRacquet1] = useState<Racquet>(mockRacquets[0]);
-  const [racquet2, setRacquet2] = useState<Racquet>(mockRacquets[1]);
+  const [racquet1, setRacquet1] = useState<RacquetModel>(mockRacquets[0]);
+  const [racquet2, setRacquet2] = useState<RacquetModel>(mockRacquets[1]);
 
   return (
     <div className="">
@@ -18,12 +19,12 @@ export const ComparePage = () => {
             currentItem={racquet1}
             onSelect={setRacquet1}
           />
-          <RacquetCard racquet={racquet1} displayDirection="LTR" />
+          <RacquetCard racquet={racquet1} />
         </div>
         <div className="flex flex-col justify-center">
           <CompareStats
-            specs_1={racquet1.specs || []}
-            specs_2={racquet2.specs || []}
+            specs_1={racquet1.versions[0].specs || []}
+            specs_2={racquet2.versions[0].specs || []}
           />
         </div>
         <div className="flex flex-col gap-5">
@@ -32,7 +33,7 @@ export const ComparePage = () => {
             currentItem={racquet2}
             onSelect={setRacquet2}
           />
-          <RacquetCard racquet={racquet2} displayDirection="RTL" />
+          <RacquetCard racquet={racquet2} />
         </div>
       </div>
     </div>

@@ -1,12 +1,5 @@
 import mockPhoto from "../../assets/stockPhoto.jpg";
-
-export type Racquet = {
-  id: string;
-  name: string;
-  specs?: Spec[];
-  brand: string;
-  price: number;
-};
+import type { RacquetModel } from "../../utils/utils";
 
 export type Spec = {
   label: string;
@@ -16,8 +9,7 @@ export type Spec = {
 };
 
 export type RacquetCardProps = {
-  racquet: Racquet;
-  displayDirection: "LTR" | "RTL";
+  racquet: RacquetModel;
 };
 
 export const RacquetCard = ({ racquet }: RacquetCardProps) => {
